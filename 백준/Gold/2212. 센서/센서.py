@@ -16,8 +16,10 @@ for idx, i in enumerate(sensor_lst):
         dist_lst.append(dist)
 
 for i in range(n_house - 1):
-    if len(dist_lst) > 0:
+    try:
         dist_lst.remove(max(dist_lst))
+    except:
+        pass
 
 
 print(sum(dist_lst))

@@ -34,7 +34,7 @@ def robot_cleaning(home_map, start_x, start_y, direction):
         # 주변에 청소되지 않은 곳이 없을 경우
         else:
             if 0 <= robot_p[0] - move_direction[direction][0] < rows and 0 <= robot_p[1] - move_direction[direction][1] < cols:
-                if home_map[robot_p[0] - move_direction[direction][0]][robot_p[1] - move_direction[direction][1]] == 0 | 2:
+                if home_map[robot_p[0] - move_direction[direction][0]][robot_p[1] - move_direction[direction][1]] in (0,2):
                     robot_p = [robot_p[0] - move_direction[direction][0], robot_p[1] - move_direction[direction][1]]
 
                 else:

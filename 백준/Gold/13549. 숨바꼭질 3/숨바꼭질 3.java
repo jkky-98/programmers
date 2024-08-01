@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +31,6 @@ public class Main {
         visited[N] = 0;
 
         while (!deque.isEmpty()) {
-//            System.out.println(deque);
             Step poll = deque.poll();
 
             if (poll.pos == M) {
@@ -78,27 +75,6 @@ public class Main {
         public Step(Integer pos, Integer time) {
             this.pos = pos;
             this.time = time;
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            if (this == object) return true;
-            if (object == null || getClass() != object.getClass()) return false;
-            Step step = (Step) object;
-            return Objects.equals(pos, step.pos);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(pos);
-        }
-
-        @Override
-        public String toString() {
-            return "Step{" +
-                    "pos=" + pos +
-                    ", time=" + time +
-                    '}';
         }
     }
 }

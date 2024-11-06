@@ -1,0 +1,5 @@
+-- 코드를 입력하세요
+SELECT fw.WAREHOUSE_ID, fw.WAREHOUSE_NAME, fw.ADDRESS, COALESCE(fw.FREEZER_YN,'N') AS FREEZER_YN
+from FOOD_WAREHOUSE as fw
+where fw.WAREHOUSE_NAME like '%경기%'
+order by fw.WAREHOUSE_ID;

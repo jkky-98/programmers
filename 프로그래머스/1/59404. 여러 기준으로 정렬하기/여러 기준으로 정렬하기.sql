@@ -1,4 +1,8 @@
 -- 코드를 입력하세요
-SELECT ai.ANIMAL_ID, ai.NAME, ai.DATETIME
-from ANIMAL_INS as ai
-order by ai.NAME, ai.DATETIME DESC
+SELECT
+    ANIMAL_ID,
+    NAME,
+    DATETIME
+FROM
+    ANIMAL_INS
+ORDER BY NAME, DATETIME DESC;

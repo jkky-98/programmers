@@ -1,4 +1,5 @@
 -- 코드를 입력하세요
-SELECT *
-from ANIMAL_INS as ai
-order by ANIMAL_ID
+SELECT
+    *
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;

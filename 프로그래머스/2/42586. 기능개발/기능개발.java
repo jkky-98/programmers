@@ -1,29 +1,40 @@
 import java.util.*;
 
 class Solution {
+    static Deque<Integer> queue;
+    
     public int[] solution(int[] progresses, int[] speeds) {
-        List<Integer> result = new ArrayList<>();
-        int n = progresses.length;
-        int[] days = new int[n];
         
-        for (int i = 0; i < n; i++) {
-            days[i] = (int) Math.ceil((100.0 - progresses[i]) / speeds[i]);
+        queue = new ArrayDeque<>();
+        
+        for (int i = 0; i < progresses.length; i++) {
+            queue.offer(analysisDay(progresses[i], speeds[i]));
         }
         
-        int maxDay = days[0];
+        List<Integer> resultList = new ArrayList<>();
+        int current = queue.poll();
         int count = 1;
-        
-        for (int i = 1; i < n; i++) {
-            if (days[i] <= maxDay) {
+
+        while (!queue.isEmpty()) {
+            if (queue.peek() <= current) {
+                queue.poll();
                 count++;
             } else {
-                result.add(count);
+                resultList.add(count);
+                current = queue.poll();
                 count = 1;
-                maxDay = days[i];
             }
         }
-        result.add(count); // 마지막 배포
+        resultList.add(count); // 마지막 그룹
 
-        return result.stream().mapToInt(i -> i).toArray();
+        return resultList.stream().mapToInt(i -> i.intValue()).toArray();
+    }
+    
+    public int analysisDay(int progress, int speed) {
+        int remainProgress = 100 - progress; // 0보다 무조건 큼 
+        
+        int remainDay = (int) Math.ceil((double) remainProgress / speed);
+        
+        return remainDay;
     }
 }

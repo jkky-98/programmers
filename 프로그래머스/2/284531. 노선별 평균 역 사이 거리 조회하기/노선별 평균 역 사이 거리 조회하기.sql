@@ -1,0 +1,7 @@
+select
+    ROUTE,
+    CONCAT(ROUND(SUM(D_BETWEEN_DIST), 2), 'km') as TOTAL_DISTANCE,
+    CONCAT(ROUND(AVG(D_BETWEEN_DIST), 2), 'km') as AVERAGE_DISTANCE
+from SUBWAY_DISTANCE sd
+group by sd.ROUTE
+order by SUM(D_BETWEEN_DIST) desc;

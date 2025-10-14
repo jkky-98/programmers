@@ -1,53 +1,30 @@
 import java.util.*;
 
-class Solution {
-    
-    static Map<Integer, Integer> tangMap = new HashMap<>();
-    static Map<Integer, Deque<Integer>> treeMap = new TreeMap<>(Comparator.reverseOrder());
-    static int result = 0;
-    
+class Solution {    
     public int solution(int k, int[] tangerine) {
+        // 2차 풀이
+        // getOrDefault() 사용
+        // Collections.sort(콜렉션, Comparators.reverseOrder()) 사용
+        Map<Integer, Integer> map = new HashMap<>();
         
         for (int t : tangerine) {
-            if (tangMap.containsKey(t)) {
-                // 존재할 경우
-                tangMap.put(t, tangMap.get(t) + 1);
-            } else {
-                // 존재 x
-                tangMap.put(t, 1);
-            }
+            map.put(t, map.getOrDefault(t, 0) + 1);
         }
         
-        // TreeMap으로 key, value 역전시키기
-        for (Map.Entry<Integer, Integer> entry: tangMap.entrySet()) {
-            int tangerineSize = entry.getKey();
-            int tangerineCount = entry.getValue();
-            
-            if (treeMap.containsKey(tangerineCount)) {
-                treeMap.get(tangerineCount).offer(tangerineSize);
-            } else {
-                treeMap.put(tangerineCount, new ArrayDeque<>());
-                treeMap.get(tangerineCount).offer(tangerineSize);
-            }
-        }
-
-        // 귤 쌓기
-        for (Map.Entry<Integer, Deque<Integer>> entry : treeMap.entrySet()) {
-            int count = entry.getKey();
-            Deque<Integer> sizes = entry.getValue();
-            
-            while (!sizes.isEmpty()) {
-                int size = sizes.poll();
-                k = k - count;
-                result++;
-                if (k <= 0) {
-                    return result;
-                }
-            }
-        }
+        List<Integer> countList = new ArrayList<>(map.values());
         
+        // desc 정렬
+        Collections.sort(countList, Comparator.reverseOrder());
         
         int answer = 0;
-        return answer;
+        for (int count : countList) {
+            answer++;
+            k = k - count;
+            if (k <= 0) {
+                return answer;
+            }
+        }
+        
+        return -1;
     }
 }
